@@ -410,9 +410,7 @@ public class Main {
                 randomReplies[1] = "That sounds great, but I'm afraid I don't know what you're talking about. Perhaps, I'm not hearing you right? Fortunately, I am well versed in our theatres offerings. Would you like to check out some movies?";
                 randomReplies[2] = "I wish I could help, but I'm unfamiliar with that. Are you interested in watching any of these movies: " + a + "Or would you like some snacks or drinks?";
                 randomReplies[3] = "I'm sorry, I haven't heard of that. Do you want to check these movies out?: " + a;
-    
-                //change some of these to our snacks and drinks, there doesn't seem to be multiple random movie response methods in the rubric? 
-    
+        
                 int index = (int)(Math.random()*randomReplies.length);
     
                 return randomReplies[index];
