@@ -8,6 +8,7 @@ public class Main {
     static String[] cart = new String[30]; 
     static String currentItem = "";
     static boolean add = false;
+    static boolean calledCart = false;
     static String purple = "\033[35m";
     static String erase = "\033[0m";
     //tracks number of items in cart
@@ -83,7 +84,7 @@ public class Main {
 
                 //if user greets chatbot
                 if(statement.contains("hi") || statement.contains("Hi") || statement.contains("Hello") || statement.contains("Hey") || statement.contains("hey")){
-                        response = "Hi! Want to look at some movies? Ask me to pull up the catalog.";
+                        response = "Hi! Want to look at some movies? Ask me to pull up the catalog. Note: Each movie ticket costs $15.";
                 }
 
                 //if user says no 
@@ -102,26 +103,26 @@ public class Main {
                 }
 
                 //if user wants to hear about all the movies or wants to pull up the catalog
-                else if (statement.contains("ovie") || statement.contains("catalog")){
-                        response = "We currently show " + movielist + "Would you like to add one to cart? Or would you like to hear more about them?";
+                else if (statement.contains("ovie") || statement.contains("cata")){
+                        response = "We currently show " + movielist + "Would you like to add one to cart? Or would you like to hear more about them? Note: Each movie ticket costs $15.";
                 }
 
                 //if user wants to hear more about a specific movie or wants to continue browsing
-                else if (statement.contains("hear") || statement.contains("browsing") || statement.contains("keep shopping")){
+                else if (statement.contains("hear") || statement.contains("browsing") || statement.contains("shop")){
                         response = "Which movie would you like to hear about? Or would you like to hear about the snacks or drinks?";
+                }
+                
+                //if user asks about a specific movie 
+                else if((statement.contains("pool") ||statement.contains("rine") || statement.contains("picab") || statement.contains("cipab") ||statement.contains("rans") || statement.contains("wis") || statement.contains("une") || statement.contains("side"))){
+                        response = movieInfo(getItem(statement)) + ". Should I add to cart or would you like to continue browsing?";
+                        currentItem = getItem(statement);
+
                 }
 
                 //if user wants to add a specific movie 
                 else if((statement.contains("pool") ||statement.contains("rine") || statement.contains("picab") || statement.contains("cipab") || statement.contains("rans") || statement.contains("wis") || statement.contains("une") || statement.contains("side")) && add == true){
                         addItem(getItem(statement));
                         add = false;
-                }
-
-                //if user asks about a specific movie 
-                else if((statement.contains("pool") ||statement.contains("rine") || statement.contains("picab") || statement.contains("cipab") ||statement.contains("rans") || statement.contains("wis") || statement.contains("une") || statement.contains("side"))){
-                        response = movieInfo(getItem(statement)) + ". Should I add to cart or would you like to continue browsing?";
-                        currentItem = getItem(statement);
-
                 }
 
                 //if user asks about snacks 
@@ -184,8 +185,32 @@ public class Main {
                         }
                         int total = (movies * 15) + (snacks * 3) + (drinks * 2);
                         response += " Your total is $" + total + ". Would you like to check out or keep shopping?";
+                        calledCart = true;
                 }
-                //if user wants to check out 
+                //if user wants to check out and called cart
+                else if((statement.contains("check out") || statement.contains("checkout")) && calledCart == true ){
+                        int movies = 0;
+                        int snacks = 0; 
+                        int drinks = 0;
+
+                   
+                        for(int i = 0; i < cartIndex; i++){
+                                if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
+                                        movies++;
+                                }
+                                else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
+                                        snacks++;
+                                }
+                                else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
+                                        drinks++;
+                                }
+                        }
+                        
+                        int total = (movies * 15) + (snacks * 3) + (drinks * 2);
+                        response = "Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
+                        calledCart = false;
+                }
+                //if user wants to check out, but didn't call cart
                 else if(statement.contains("check out") || statement.contains("checkout")){
                         int movies = 0;
                         int snacks = 0; 
@@ -218,6 +243,7 @@ public class Main {
                         }
                         int total = (movies * 15) + (snacks * 3) + (drinks * 2);
                         response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
+                        calledCart = false;
                 }
                 else{
                         response = getRandomResponse();
@@ -262,7 +288,7 @@ public class Main {
                         }
                 //if user greets chatbot
                 if(statement2.contains("hi") || statement2.contains("Hi") || statement2.contains("Hello") || statement2.contains("Hey") || statement2.contains("hey")){
-                        response = "Hi! Want to look at some movies? Ask me to pull up the catalog.";
+                        response = "Hi! Want to look at some movies? Ask me to pull up the catalog. Note: Each movie ticket costs $15.";
                 }
                 //if user says no 
                 else if (statement2.contains("no") || statement2.contains("No") || statement2.contains("NO")){
@@ -278,22 +304,22 @@ public class Main {
                         response = "Which item would you like to add?";
                 }
                 //if user wants to hear about all the movies available 
-                else if (statement2.contains("ovie") || statement2.contains("catalog")){
-                        response = "We currently show " + movielist + "Would you like to add one to cart? Or would you like to hear more about them?";
-                }
-                //if user wants to add a specific movie 
-                else if((statement2.contains("pool") ||statement2.contains("rine") || statement2.contains("picab") || statement2.contains("cipab") || statement2.contains("rans") || statement2.contains("wis") || statement2.contains("une") || statement2.contains("side")) && add == true){
-                        addItem(getItem(statement2));
-                        add = false;
+                else if (statement2.contains("ovie") || statement2.contains("cata")){
+                        response = "We currently show " + movielist + "Would you like to add one to cart? Or would you like to hear more about them? Note: Each movie ticket costs $15.";
                 }
                 //if user wants to hear more about a specific movie 
-                else if (statement2.contains("hear") || statement2.contains("browsing") || statement2.contains("keep shopping")){
+                else if (statement2.contains("hear") || statement2.contains("browsing") || statement2.contains("shop")){
                         response = "Would you like to hear about more movies? Or would you like to hear about the snacks or drinks?";
                 }
                 //if user asks about a specific movie 
                 else if((statement2.contains("pool") ||statement2.contains("rine") || statement2.contains("picab") || statement2.contains("cipab") || statement2.contains("rans") || statement2.contains("wis") || statement2.contains("une") || statement2.contains("side"))){
                         response = movieInfo(getItem(statement2)) + ". Should I add to cart or would you like to continue browsing?";
                         currentItem = getItem(statement2);
+                }
+                //if user wants to add a specific movie 
+                else if((statement2.contains("pool") ||statement2.contains("rine") || statement2.contains("picab") || statement2.contains("cipab") || statement2.contains("rans") || statement2.contains("wis") || statement2.contains("une") || statement2.contains("side")) && add == true){
+                        addItem(getItem(statement2));
+                        add = false;
                 }
                 //if user asks about snacks 
                 else if (statement2.contains("nack") || statement2.contains("nakc")){
@@ -352,8 +378,32 @@ public class Main {
                         }
                         int total = (movies * 15) + (snacks * 3) + (drinks * 2);
                         response += " Your total is $" + total + ". Would you like to check out or keep shopping?";
+                        calledCart = true;
                 }
-                //if user wants to check out 
+                //if user wants to check out and called cart
+                else if((statement2.contains("check out") || statement2.contains("checkout")) && calledCart == true ){
+                        int movies = 0;
+                        int snacks = 0; 
+                        int drinks = 0;
+
+                   
+                        for(int i = 0; i < cartIndex; i++){
+                                if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
+                                        movies++;
+                                }
+                                else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
+                                        snacks++;
+                                }
+                                else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
+                                        drinks++;
+                                }
+                        }
+                        
+                        int total = (movies * 15) + (snacks * 3) + (drinks * 2);
+                        response = "Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
+                        calledCart = false;
+                }
+                //if user wants to check out, but didn't call cart
                 else if(statement2.contains("check out") || statement2.contains("checkout")){
                         int movies = 0;
                         int snacks = 0; 
@@ -385,7 +435,8 @@ public class Main {
                                 }
                         }
                         int total = (movies * 15) + (snacks * 3) + (drinks * 2);
-                        response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your experience!";
+                        response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
+                        calledCart = false;
                 }
                 else{
                         response = getRandomResponse();
@@ -406,10 +457,10 @@ public class Main {
                     }
                  }
     
-                randomReplies[0] = "I'm not the right person to ask about that topic. Could you clarify? I can also guide you towards some movie options. Would you like to watch one of these: " + a;
-                randomReplies[1] = "That sounds great, but I'm afraid I don't know what you're talking about. Perhaps, I'm not hearing you right? Fortunately, I am well versed in our theatres offerings. Would you like to check out some movies?";
-                randomReplies[2] = "I wish I could help, but I'm unfamiliar with that. Are you interested in watching any of these movies: " + a + "Or would you like some snacks or drinks?";
-                randomReplies[3] = "I'm sorry, I haven't heard of that. Do you want to check these movies out?: " + a;
+                randomReplies[0] = "I'm not the right person to ask about that topic. Could you clarify? I can also guide you towards some movie options. Ask me about one of these: " + a;
+                randomReplies[1] = "That sounds great, but I'm afraid I don't know what you're talking about. Perhaps, I'm not hearing you right? Fortunately, I am well versed in our theatres offerings. Ask me about our movies.";
+                randomReplies[2] = "I wish I could help, but I'm unfamiliar with that. Tell me whether you want to hear about our snack, drink, or movie options.";
+                randomReplies[3] = "I'm sorry, I haven't heard of that. Ask me about one of these: " + a;
         
                 int index = (int)(Math.random()*randomReplies.length);
     
@@ -420,7 +471,7 @@ public class Main {
                 String [] followups = new String[3];
 
                 followups[0] = "Excellent choice! Would you like to view your cart? Or grab any snacks or drinks?";
-                followups[1] = "A good drink can elevate your viewing experience. Would you like to see the drink options?";
+                followups[1] = "A good drink can elevate your viewing experience. Would you like to see the drink options? Ask me about the drinks menu.";
                 followups[2] = "Great! More Snacks? Drinks? Or do you want to go to cart?";
 
                 int index = (int)(Math.random()*followups.length);
@@ -430,6 +481,8 @@ public class Main {
                         cart[cartIndex] = item; // set string to the index
                         cartIndex++;
                 }
+
+                currentItem = "";
         }
 
         public static String getItem(String x){
@@ -496,7 +549,7 @@ public class Main {
 
                 //movie descriptions
                 if(movie.equals(available[0].getName())){
-                        info += available[0].getName() + " is a " + available[0].getGenre() + " movie rated " + available[0].getRating() + ". It stars Deadpool teaming up with Wolverine to save the multiverse";
+                        info += available[0].getName() + " is a " + available[0].getGenre() + " movie rated " + available[0].getRating() + ". It features Deadpool teaming up with Wolverine to save the multiverse";
                 }
                 if(movie.equals(available[1].getName())){
                         info += available[1].getName() + " is a " + available[1].getGenre() + " movie rated " + available[1].getRating() + ". It is a continuation of the Despicable Me series where Gru and his family are forced to go on the run due to the escape of a criminal who wants revenge on Gru";
