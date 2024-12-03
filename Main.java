@@ -188,7 +188,7 @@ public class Main {
                         calledCart = true;
                 }
                 //if user wants to check out and called cart
-                else if((statement.contains("check out") || statement.contains("checkout")) && calledCart == true ){
+                else if(statement.contains("check") && calledCart == true ){
                         int movies = 0;
                         int snacks = 0; 
                         int drinks = 0;
@@ -211,7 +211,7 @@ public class Main {
                         calledCart = false;
                 }
                 //if user wants to check out, but didn't call cart
-                else if(statement.contains("check out") || statement.contains("checkout")){
+                else if(statement.contains("check")){
                         int movies = 0;
                         int snacks = 0; 
                         int drinks = 0;
@@ -381,7 +381,7 @@ public class Main {
                         calledCart = true;
                 }
                 //if user wants to check out and called cart
-                else if((statement2.contains("check out") || statement2.contains("checkout")) && calledCart == true ){
+                else if(statement2.contains("check") && calledCart == true ){
                         int movies = 0;
                         int snacks = 0; 
                         int drinks = 0;
@@ -404,7 +404,7 @@ public class Main {
                         calledCart = false;
                 }
                 //if user wants to check out, but didn't call cart
-                else if(statement2.contains("check out") || statement2.contains("checkout")){
+                else if(statement2.contains("check")){
                         int movies = 0;
                         int snacks = 0; 
                         int drinks = 0;
