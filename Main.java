@@ -82,28 +82,8 @@ public class Main {
                                }
                         }
 
-                //if user greets chatbot
-                if(statement.contains("hi") || statement.contains("Hi") || statement.contains("Hello") || statement.contains("Hey") || statement.contains("hey")){
-                        response = "Hi! Want to look at some movies? Ask me to pull up the catalog. Note: Each movie ticket costs $15.";
-                }
-
-                //if user says no 
-                else if (statement.contains("no") || statement.contains("No") || statement.contains("NO")){
-                        response = "Alright then, would you like to look at some other movies? Snacks? Drinks? View cart? Check out?";
-                }
-                //if user wants to add an item 
-                else if((statement.contains("add") || statement.contains("yes") || statement.contains("Yes") )&& !currentItem.equals("")){
-                        addItem(currentItem);
-                }
-
-                //if user wants to add item, but item isn't specified
-                else if(statement.contains("add") || statement.contains("yes") || statement.contains("Yes") ){
-                        response = "Which item would you like to add?";
-                        add = true;
-                }
-
                 //if user wants to hear about all the movies or wants to pull up the catalog
-                else if (statement.contains("ovie") || statement.contains("cata")){
+                if (statement.contains("ovie") || statement.contains("cata")){
                         response = "We currently show " + movielist + "Would you like to add one to cart? Or would you like to hear more about them? Note: Each movie ticket costs $15.";
                 }
 
@@ -245,6 +225,24 @@ public class Main {
                         response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
                         calledCart = false;
                 }
+                //if user greets chatbot
+                if(statement.contains("hi") || statement.contains("Hi") || statement.contains("Hello") || statement.contains("Hey") || statement.contains("hey")){
+                        response = "Hi! Want to look at some movies? Ask me to pull up the catalog. Note: Each movie ticket costs $15.";
+                }
+
+                //if user says no 
+                else if (statement.contains("no") || statement.contains("No") || statement.contains("NO")){
+                        response = "Alright then, would you like to look at some other movies? Snacks? Drinks? View cart? Check out?";
+                }
+                //if user wants to add an item 
+                else if((statement.contains("add") || statement.contains("yes") || statement.contains("Yes") )&& !currentItem.equals("")){
+                        addItem(currentItem);
+                }
+                //if user wants to add item, but item isn't specified
+                else if(statement.contains("add") || statement.contains("yes") || statement.contains("Yes") ){
+                        response = "Which item would you like to add?";
+                        add = true;
+                }
                 else{
                         response = getRandomResponse();
                 }
@@ -286,25 +284,8 @@ public class Main {
                                        snacklist += snacks[i] + ", ";
                                }
                         }
-                //if user greets chatbot
-                if(statement2.contains("hi") || statement2.contains("Hi") || statement2.contains("Hello") || statement2.contains("Hey") || statement2.contains("hey")){
-                        response = "Hi! Want to look at some movies? Ask me to pull up the catalog. Note: Each movie ticket costs $15.";
-                }
-                //if user says no 
-                else if (statement2.contains("no") || statement2.contains("No") || statement2.contains("NO")){
-                        response = "Alright then, would you like to look at some other movies? Snacks? Drinks? View cart? Check out?";
-                }
-                //if user wants to add an item 
-                else if((statement2.contains("add") || statement2.contains("yes") || statement2.contains("Yes") )&& !currentItem.equals("")){
-                        addItem(currentItem);
-                        add = true;
-                }
-                //if user wants to add item, but item isn't specified
-                else if(statement2.contains("add") || statement2.contains("yes") || statement2.contains("Yes") ){
-                        response = "Which item would you like to add?";
-                }
                 //if user wants to hear about all the movies available 
-                else if (statement2.contains("ovie") || statement2.contains("cata")){
+                if (statement2.contains("ovie") || statement2.contains("cata")){
                         response = "We currently show " + movielist + "Would you like to add one to cart? Or would you like to hear more about them? Note: Each movie ticket costs $15.";
                 }
                 //if user wants to hear more about a specific movie 
@@ -437,6 +418,25 @@ public class Main {
                         int total = (movies * 15) + (snacks * 3) + (drinks * 2);
                         response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
                         calledCart = false;
+                }
+                //if user greets chatbot
+                if(statement.contains("hi") || statement.contains("Hi") || statement.contains("Hello") || statement.contains("Hey") || statement.contains("hey")){
+                        response = "Hi! Want to look at some movies? Ask me to pull up the catalog. Note: Each movie ticket costs $15.";
+                }
+
+                //if user says no 
+                else if (statement.contains("no") || statement.contains("No") || statement.contains("NO")){
+                        response = "Alright then, would you like to look at some other movies? Snacks? Drinks? View cart? Check out?";
+                }
+                //if user wants to add an item 
+                else if((statement.contains("add") || statement.contains("yes") || statement.contains("Yes") )&& !currentItem.equals("")){
+                        addItem(currentItem);
+                }
+
+                //if user wants to add item, but item isn't specified
+                else if(statement.contains("add") || statement.contains("yes") || statement.contains("Yes") ){
+                        response = "Which item would you like to add?";
+                        add = true;
                 }
                 else{
                         response = getRandomResponse();
