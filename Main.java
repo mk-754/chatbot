@@ -420,21 +420,21 @@ public class Main {
                         calledCart = false;
                 }
                 //if user greets chatbot
-                if(statement.contains("hi") || statement.contains("Hi") || statement.contains("Hello") || statement.contains("Hey") || statement.contains("hey")){
+                if(statement2.contains("hi") || statement2.contains("Hi") || statement2.contains("Hello") || statement2.contains("Hey") || statement2.contains("hey")){
                         response = "Hi! Want to look at some movies? Ask me to pull up the catalog. Note: Each movie ticket costs $15.";
                 }
 
                 //if user says no 
-                else if (statement.contains("no") || statement.contains("No") || statement.contains("NO")){
+                else if (statement2.contains("no") || statement2.contains("No") || statement2.contains("NO")){
                         response = "Alright then, would you like to look at some other movies? Snacks? Drinks? View cart? Check out?";
                 }
                 //if user wants to add an item 
-                else if((statement.contains("add") || statement.contains("yes") || statement.contains("Yes") )&& !currentItem.equals("")){
+                else if((statement2.contains("add") || statement2.contains("yes") || statement2.contains("Yes") )&& !currentItem.equals("")){
                         addItem(currentItem);
                 }
 
                 //if user wants to add item, but item isn't specified
-                else if(statement.contains("add") || statement.contains("yes") || statement.contains("Yes") ){
+                else if(statement2.contains("add") || statement2.contains("yes") || statement2.contains("Yes") ){
                         response = "Which item would you like to add?";
                         add = true;
                 }
