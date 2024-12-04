@@ -457,10 +457,10 @@ public class Main {
                     }
                  }
     
-                randomReplies[0] = "I'm not the right person to ask about that topic. Could you clarify? I can also guide you towards some movie options. Ask me about one of these: " + a;
+                randomReplies[0] = "Do you even know what you're talking about? That's not a movie man. Here are the movies we actually offer: " + a;
                 randomReplies[1] = "That sounds great, but I'm afraid I don't know what you're talking about. Perhaps, I'm not hearing you right? Fortunately, I am well versed in our theatres offerings. Ask me about our movies.";
                 randomReplies[2] = "I wish I could help, but I'm unfamiliar with that. Tell me whether you want to hear about our snack, drink, or movie options.";
-                randomReplies[3] = "I'm sorry, I haven't heard of that. Ask me about one of these: " + a;
+                randomReplies[3] = "Are you trying to waste my time? My shift ends in 5 minutes...Here are the options, give me a movie that actually exists: " + a;
         
                 int index = (int)(Math.random()*randomReplies.length);
     
