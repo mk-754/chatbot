@@ -320,7 +320,7 @@ public class Main {
                        response = "Would you like to hear about more movies? Or would you like to hear about the snacks or drinks?";
                }
                //if user asks about a specific movie
-               else if((statement2.contains("pool") ||statement2.contains("rine") || statement2.contains("picab") || tatement2.contains("cipab") || statement2.contains("rans") || statement2.contains("wis") || statement2.contains("une") || statement2.contains("side"))){
+               else if((statement2.contains("pool") ||statement2.contains("rine") || statement2.contains("picab") || statement2.contains("cipab") || statement2.contains("rans") || statement2.contains("wis") || statement2.contains("une") || statement2.contains("side"))){
                        response = movieInfo(getItem(statement2)) + ". Should I add to cart or would you like to continue browsing?";
                        currentItem = getItem(statement2);
                }
