@@ -10,6 +10,7 @@ public class Main {
    static String[] cart = new String[30];
    static String currentItem = "";
    static boolean add = false;
+   static boolean calledCart = false;
    static String purple = "\033[35m";
    static String erase = "\033[0m";
    //tracks number of items in cart
@@ -173,77 +174,99 @@ public class Main {
                        currentItem = getItem(statement);
                }  
 
+//if user wants to view cart
+                else if(statement.contains("cart") || statement.contains("view")){
+                        int movies = 0;
+                        int snacks = 0; 
+                        int drinks = 0;
 
-               //if user wants to view cart
-               else if(statement.contains("cart") || statement.contains("view")){
-                       int movies = 0;
-                       int snacks = 0;
-                       int drinks = 0;
+                   
+                        for(int i = 0; i < cartIndex; i++){
+                                if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
+                                        movies++;
+                                }
+                                else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
+                                        snacks++;
+                                }
+                                else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
+                                        drinks++;
+                                }
+                        }
+                        
+                        response = "The contents of your cart are: ";
+                        for (int i = 0; i < cartIndex; i++) {
+                                if (cartIndex == 0){
+                                        response = "Your cart is empty";
+                                }
+                                else if (i == cartIndex - 1){
+                                        response += cart[i] + ".";
+                                }
+                                else{
+                                        response += cart[i] + ", ";
+                                }
+                        }
+                        int total = (movies * 15) + (snacks * 3) + (drinks * 2);
+                        response += " Your total is $" + total + ". Would you like to check out or keep shopping?";
+                        calledCart = true;
+                }
+                //if user wants to check out and called cart
+                else if(statement.contains("check") && calledCart == true ){
+                        int movies = 0;
+                        int snacks = 0; 
+                        int drinks = 0;
 
+                   
+                        for(int i = 0; i < cartIndex; i++){
+                                if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
+                                        movies++;
+                                }
+                                else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
+                                        snacks++;
+                                }
+                                else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
+                                        drinks++;
+                                }
+                        }
+                        
+                        int total = (movies * 15) + (snacks * 3) + (drinks * 2);
+                        response = "Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
+                        calledCart = false;
+                }
+                //if user wants to check out, but didn't call cart
+                else if(statement.contains("check")){
+                        int movies = 0;
+                        int snacks = 0; 
+                        int drinks = 0;
 
-                 
-                       for(int i = 0; i < cartIndex; i++){
-                               if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
-                                       movies++;
-                               }
-                               else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
-                                       snacks++;
-                               }
-                               else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
-                                       drinks++;
-                               }
-                       }
-                      
-                       response = "The contents of your cart are: ";
-                       for (int i = 0; i < cartIndex; i++) {
-                               if (cartIndex == 0){
-                                       response = "Your cart is empty";
-                               }
-                               else if (i == cartIndex - 1){
-                                       response += cart[i] + ".";
-                               }
-                               else{
-                                       response += cart[i] + ", ";
-                               }
-                       }
-                       int total = (movies * 15) + (snacks * 3) + (drinks * 2);
-                       response += " Your total is $" + total + ". Would you like to check out or keep shopping?";
-               }
-               //if user wants to check out
-               else if(statement.contains("check out")){
-                       int movies = 0;
-                       int snacks = 0;
-                       int drinks = 0;
-
-
-                 
-                       for(int i = 0; i < cartIndex; i++){
-                               if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
-                                       movies++;
-                               }
-                               else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
-                                       snacks++;
-                               }
-                               else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
-                                       drinks++;
-                               }
-                       }
-                      
-                       response = "The contents of your cart are: ";
-                       for (int i = 0; i < cartIndex; i++) {
-                               if (cartIndex == 0){
-                                       response = "Your cart is empty";
-                               }
-                               else if (i == cartIndex - 1){
-                                       response += cart[i] + ".";
-                               }
-                               else{
-                                       response += cart[i] + ", ";
-                               }
-                       }
-                       int total = (movies * 15) + (snacks * 3) + (drinks * 2);
-                       response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
-               }
+                   
+                        for(int i = 0; i < cartIndex; i++){
+                                if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
+                                        movies++;
+                                }
+                                else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
+                                        snacks++;
+                                }
+                                else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
+                                        drinks++;
+                                }
+                        }
+                        
+                        response = "The contents of your cart are: ";
+                        for (int i = 0; i < cartIndex; i++) {
+                                if (cartIndex == 0){
+                                        response = "Your cart is empty";
+                                }
+                                else if (i == cartIndex - 1){
+                                        response += cart[i] + ".";
+                                }
+                                else{
+                                        response += cart[i] + ", ";
+                                }
+                        }
+                        int total = (movies * 15) + (snacks * 3) + (drinks * 2);
+                        response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
+                        calledCart = false;
+                }
                else{
                        response = getRandomResponse();
                }
@@ -349,74 +372,97 @@ public class Main {
       
                }
                //if user wants to view cart
-               else if(statement2.contains("cart") || statement2.contains("view")){
-                       int movies = 0;
-                       int snacks = 0;
-                       int drinks = 0;
+                else if(statement2.contains("cart") || statement2.contains("view")){
+                        int movies = 0;
+                        int snacks = 0; 
+                        int drinks = 0;
 
+                   
+                        for(int i = 0; i < cartIndex; i++){
+                                if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
+                                        movies++;
+                                }
+                                else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
+                                        snacks++;
+                                }
+                                else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
+                                        drinks++;
+                                }
+                        }
+                        
+                        response = "The contents of your cart are: ";
+                        for (int i = 0; i < cartIndex; i++) {
+                                if (cartIndex == 0){
+                                        response = "Your cart is empty";
+                                }
+                                else if (i == cartIndex - 1){
+                                        response += cart[i] + ".";
+                                }
+                                else{
+                                        response += cart[i] + ", ";
+                                }
+                        }
+                        int total = (movies * 15) + (snacks * 3) + (drinks * 2);
+                        response += " Your total is $" + total + ". Would you like to check out or keep shopping?";
+                        calledCart = true;
+                }
+                //if user wants to check out and called cart
+                else if(statement2.contains("check") && calledCart == true ){
+                        int movies = 0;
+                        int snacks = 0; 
+                        int drinks = 0;
 
-                 
-                       for(int i = 0; i < cartIndex; i++){
-                               if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
-                                       movies++;
-                               }
-                               else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
-                                       snacks++;
-                               }
-                               else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
-                                       drinks++;
-                               }
-                       }
-                      
-                       response = "The contents of your cart are: ";
-                       for (int i = 0; i < cartIndex; i++) {
-                               if (cartIndex == 0){
-                                       response = "Your cart is empty";
-                               }
-                               else if (i == cartIndex - 1){
-                                       response += cart[i] + ".";
-                               }
-                               else{
-                                       response += cart[i] + ", ";
-                               }
-                       }
-                       int total = (movies * 15) + (snacks * 3) + (drinks * 2);
-                       response += " Your total is $" + total + ". Would you like to check out or keep shopping?";
-               }
-               //if user wants to check out
-               else if(statement2.contains("check out")){
-                       int movies = 0;
-                       int snacks = 0;
-                       int drinks = 0;
+                   
+                        for(int i = 0; i < cartIndex; i++){
+                                if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
+                                        movies++;
+                                }
+                                else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
+                                        snacks++;
+                                }
+                                else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
+                                        drinks++;
+                                }
+                        }
+                        
+                        int total = (movies * 15) + (snacks * 3) + (drinks * 2);
+                        response = "Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
+                        calledCart = false;
+                }
+                //if user wants to check out, but didn't call cart
+                else if(statement2.contains("check")){
+                        int movies = 0;
+                        int snacks = 0; 
+                        int drinks = 0;
 
-
-                 
-                       for(int i = 0; i < cartIndex; i++){
-                               if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
-                                       movies++;
-                               }
-                               else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
-                                       snacks++;
-                               }
-                               else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
-                                       drinks++;
-                               }
-                       }
-                      
-                       response = "The contents of your cart are: ";
-                       for (int i = 0; i < cartIndex; i++) {
-                               if (cartIndex == 0){
-                                       response = "Your cart is empty";
-                               }
-                               else if (i == cartIndex - 1){
-                                       response += cart[i] + ".";
-                               }
-                               else{
-                                       response += cart[i] + ", ";
-                               }
-                       }
-                       int total = (movies * 15) + (snacks * 3) + (drinks * 2);
-                       response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your experience!";
+                   
+                        for(int i = 0; i < cartIndex; i++){
+                                if((cart[i].contains("pool") || cart[i].contains("rine") || cart[i].contains("picab") || cart[i].contains("rans") || cart[i].contains("wis") || cart[i].contains("une") || cart[i].contains("side"))){
+                                        movies++;
+                                }
+                                else if(cart[i].contains("corn") ||cart[i].contains("ream") || cart[i].contains("M&M") || cart[i].contains("m&m")|| cart[i].contains("achos")){
+                                        snacks++;
+                                }
+                                else if(cart[i].contains("ater") ||cart[i].contains("anta") || cart[i].contains("prite") || cart[i].contains("oke") || cart[i].contains("iet")){
+                                        drinks++;
+                                }
+                        }
+                        
+                        response = "The contents of your cart are: ";
+                        for (int i = 0; i < cartIndex; i++) {
+                                if (cartIndex == 0){
+                                        response = "Your cart is empty";
+                                }
+                                else if (i == cartIndex - 1){
+                                        response += cart[i] + ".";
+                                }
+                                else{
+                                        response += cart[i] + ", ";
+                                }
+                        }
+                        int total = (movies * 15) + (snacks * 3) + (drinks * 2);
+                        response += " Your total is $" + total + ". Thank you for shopping at Cinema 201. Enjoy your movie!";
+                        calledCart = false;
                }
                else{
                        response = getRandomResponse();
